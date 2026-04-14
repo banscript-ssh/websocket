@@ -1,0 +1,8 @@
+.vscode/
+__pycache__/
+*.db
+*.csv
+logs/
+data_logging/
+.gateway/
+.controller/
