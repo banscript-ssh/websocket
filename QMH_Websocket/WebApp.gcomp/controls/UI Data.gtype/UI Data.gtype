@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SourceFile Checksum="ED3E1230141B7DFEB8A6DE43A83D2FBF6EE078FC3944AE0645D42952C364F6819ED33250DC121B653CFE70054C366B299F0705F6063C36C30C0EDC01CC1A390B" Timestamp="1D6710FF32AACEC" xmlns="http://www.ni.com/PlatformFramework">
+	<SourceModelFeatureSet>
+		<ParsableNamespace AssemblyFileVersion="8.3.0.2484" FeatureSetName="LabVIEW Controls" Name="http://www.ni.com/Controls.LabVIEW.Design" OldestCompatibleVersion="8.1.0.49152" Version="8.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="8.3.0.2484" FeatureSetName="Common language components" Name="http://www.ni.com/MocCommon" OldestCompatibleVersion="8.1.0.49152" Version="8.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="8.3.0.2484" FeatureSetName="Editor" Name="http://www.ni.com/PanelCommon" OldestCompatibleVersion="6.1.0.0" Version="6.1.0.49152" />
+		<ParsableNamespace AssemblyFileVersion="8.3.0.2484" FeatureSetName="Editor" Name="http://www.ni.com/PlatformFramework" OldestCompatibleVersion="8.1.0.49152" Version="8.1.0.49152" />
+		<ApplicationVersionInfo Build="8.3.0.2484" Name="LabVIEW NXG" Version="5.1.0" />
+	</SourceModelFeatureSet>
+	<TypeDefinition DataType="@dd66ba1e9dc54b99908901d53d6a5258" Id="1" xmlns="http://www.ni.com/MocCommon">
+		<Icon Id="13" ListViewIconCrop="0 0 40 40" xmlns="http://www.ni.com/PlatformFramework">
+			<IconPanel Height="[float]40" Id="15" Left="[float]0" MinHeight="[float]0" MinWidth="[float]0" PanelSizeMode="Resize" Top="[float]0" Width="[float]40">
+				<IconTemplate ClipMargin="[SMThickness]3,3,3,3" Height="[float]40" Id="16" Left="[float]0" TemplateName="[string]GrayNoText" Top="[float]0" Width="[float]40">
+					<Rectangle Fill="[SMSolidColorBrush]#ff727272" Id="17" IsHitTestVisible="[bool]False" Left="[float]0" MinHeight="[float]1" MinWidth="[float]1" RadiusX="[float]4" RadiusY="[float]4" Top="[float]0" />
+					<Rectangle Fill="[SMSolidColorBrush]#ffe5e5e5" Id="18" IsHitTestVisible="[bool]False" Left="[float]0" Margin="[SMThickness]1,1,1,1" MinHeight="[float]1" MinWidth="[float]1" RadiusX="[float]2.5" RadiusY="[float]2.5" Stroke="[SMSolidColorBrush]#fff2f2f2" Top="[float]0" />
+				</IconTemplate>
+				<Image Height="[float]30" Id="19" Left="[float]5" MinHeight="[float]13" MinWidth="[float]13" Source="[SMEmbeddedImageSource]iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACGSURBVEhL7ZJhCoAgDIW7dXfyLN3JpPcwG8tssiDY92M8l/sMccluhFoQasFP1Y7wCAdCLaB61cAnM6d6a8By0t5TI2CDgVs13+bE69TVFS91SgnqWkHbUfuAaVA9WAFT/0LeVsD0hbpcQq0FMQbajtoHTP2/tsHJ41QdbDBgn3wk1Bdy3gGrKSErHWfwAwAAAABJRU5ErkJggg==" Top="[float]5" Width="[float]30" />
+			</IconPanel>
+		</Icon>
+		<DataItem DataType="@dd66ba1e9dc54b99908901d53d6a5258" Id="20" Name="Cluster">
+			<p.DefaultValue>
+				<Cluster>
+					<Field1>False</Field1>
+					<Field2>""</Field2>
+					<Field3>0x0</Field3>
+				</Cluster>
+			</p.DefaultValue>
+		</DataItem>
+	</TypeDefinition>
+	<EnvoyManagerFile Id="5" xmlns="http://www.ni.com/PlatformFramework">
+		<EnvoyManagerRootEnvoy Id="6" ModelDefinitionType="EnvoyManagerRootEnvoy" Name="RootEnvoy" />
+		<NameScopingEnvoy AutomaticallyResolveUp="True" Id="7" Name="UI Data.gtype" NameTracksFileName="True">
+			<EmbeddedDefinitionReference Bindings="{http://www.ni.com/PlatformFramework}NeverLazy" Id="8" ModelDefinitionType="{http://www.ni.com/MocCommon}ControlDefinition" Name="ControlDefinition">
+				<ControlDefinition DefaultDirection="Control" Id="9" xmlns="http://www.ni.com/MocCommon">
+					<Cluster AutoArrange="[AutoArrange]ArrangeVertically" BaseName="[string]Cluster" BorderThickness="[SMThickness]1,1,1,1" ClusterType="[Type]@dd66ba1e9dc54b99908901d53d6a5258" Height="[float]164" Id="22" Label="[UIModel]23" Left="[float]146" TabIndex="[int]0" Top="[float]63" Value="{DataItemBinding Id=20}" Width="[float]143" xmlns="http://www.ni.com/PanelCommon">
+						<Button BaseName="[string]TextButton" Content="[string]Button" ContentVisibility="[Visibility]Collapsed" Height="[float]24" Id="26" IncludeInCapture="[bool]False" IsMomentary="[bool]False" Label="[UIModel]27" Left="[float]4" Shape="[ButtonShape]Square" TabIndex="[int]0" Top="[float]24" Value="{ClusterBinding FieldName=Boolean\ &lt;Replace\ Me&gt;}" Width="[float]72" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<Label Height="[float]16" Id="27" LabelOwner="[UIModel]26" Left="[float]4" Text="[string]Boolean &lt;Replace Me&gt;" Top="[float]4" Width="[float]125" />
+						<StringControl AcceptsReturn="[bool]True" BaseName="[string]String" Height="[float]24" HorizontalScrollBarVisibility="[ScrollBarVisibility]Hidden" Id="30" Label="[UIModel]31" Left="[float]4" TabIndex="[int]1" Text="{ClusterBinding FieldName=String\ &lt;Replace\ Me&gt;}" Top="[float]76" VerticalScrollBarVisibility="[ScrollBarVisibility]Auto" Width="[float]72" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<Label Height="[float]16" Id="31" LabelOwner="[UIModel]30" Left="[float]4" Text="[string]String &lt;Replace Me&gt;" Top="[float]56" Width="[float]113" />
+						<NumericText BaseName="[string]Numeric" Height="[float]24" Id="34" Label="[UIModel]35" Left="[float]4" TabIndex="[int]2" Top="[float]128" Value="{ClusterBinding FieldName=Numeric\ &lt;Replace\ Me&gt;}" ValueFormatter="[string]LV:G6" ValueType="[Type]Double" Width="[float]72" xmlns="http://www.ni.com/Controls.LabVIEW.Design" />
+						<Label Height="[float]16" Id="35" LabelOwner="[UIModel]34" Left="[float]4" Text="[string]Numeric &lt;Replace Me&gt;" Top="[float]108" Width="[float]127" />
+					</Cluster>
+					<Label Height="[float]16" Id="23" LabelOwner="[UIModel]22" Left="[float]146" Text="[string]UI Data" Top="[float]43" Width="[float]40" xmlns="http://www.ni.com/PanelCommon" />
+				</ControlDefinition>
+			</EmbeddedDefinitionReference>
+		</NameScopingEnvoy>
+	</EnvoyManagerFile>
+	<DataTypeReferenceTable xmlns="http://www.ni.com/PlatformFramework">
+		<p.TypeReference TypeId="dd66ba1e9dc54b99908901d53d6a5258">
+			<Composite Id="1" Name="" Cluster="" GenericTypeDefinition="Void" BaseType="Void">
+				<Members>
+					<Field FieldAccessPolicy="ReadWrite" Name="Boolean &lt;Replace Me&gt;" DataType="Boolean" />
+					<Field FieldAccessPolicy="ReadWrite" Name="String &lt;Replace Me&gt;" DataType="String" />
+					<Field FieldAccessPolicy="ReadWrite" Name="Numeric &lt;Replace Me&gt;" DataType="Double" />
+				</Members>
+			</Composite>
+		</p.TypeReference>
+	</DataTypeReferenceTable>
+</SourceFile>
