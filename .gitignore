@@ -6,3 +6,6 @@ logs/
 data_logging/
 .gateway/
 .controller/
+.websocket/
+venv/
+__pycache__/
