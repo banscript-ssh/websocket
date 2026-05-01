@@ -86,7 +86,6 @@ def apply_control_command(cmd: dict, command_id: str) -> Dict:
     Apply control command from GWeb (event-based control).
     This function ONLY writes to hardware and logs APPLY time.
     """
-
     start_time = time.perf_counter()
     applied_keys = []
 
