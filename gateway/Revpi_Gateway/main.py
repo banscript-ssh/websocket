@@ -1,12 +1,11 @@
 # ============================== # IMPORT LIBRARY # ============================== #
 import asyncio
 import time
-from app.server import WebsocketServer
-
+from app.server import WebSocketGatewayServer
 
 # ============================== # MAIN ENTRY # ================================== #
 async def main():
-    server = WebsocketServer(host="0.0.0.0", port=8765)
+    server = WebSocketGatewayServer(host="0.0.0.0", port=8765)
     await server.start()
 
     print("[GATEWAY] Server running on ws://0.0.0.0:8765")
