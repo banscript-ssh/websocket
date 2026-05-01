@@ -4,7 +4,7 @@ import asyncio
 import json
 import time
 
-from data_provider import read_all, process_actuators, get_actuator_state
+from revpi.data_provider import read_all, process_actuators, get_actuator_state
 from logging import measurements, event, ack
 
 
