@@ -40,24 +40,27 @@ def process_actuators():
         "PB6": int(rpi.io.I_6.value),
         "PB7": int(rpi.io.I_7.value),
         "PB8": int(rpi.io.I_8.value),
-        "PB9": int(rpi.io.I_9.value),
-        "PB10": int(rpi.io.I_10.value),
+        "EM9": int(rpi.io.I_9.value),
+        "SW10": int(rpi.io.I_10.value),
+        "SW11": int(rpi.io.I_11.value),
+        "SW12": int(rpi.io.I_12.value),
+        "SW13": int(rpi.io.I_13.value),
     }
 
     state = control_actuators(buttons)
 
-    rpi.io.O_1.value = state["LED1"]
-    rpi.io.O_2.value = state["LED2"]
-    rpi.io.O_3.value = state["LED3"]
-    rpi.io.O_4.value = state["LED4"]
-    rpi.io.O_5.value = state["BUZZ1"]
-    rpi.io.O_6.value = state["LED6"]
-    rpi.io.O_7.value = state["LED7"]
-    # rpi.io.O_8.value = state["LED8"]
-    # rpi.io.O_9.value = state["LED9"]
-    rpi.io.O_10.value = state["BUZZ2"]
+    rpi.io.O_1.value = state["BUZZ1"]
+    rpi.io.O_2.value = state["BUZZ2"]
+    rpi.io.O_3.value = state["BUZZ3"]
+    rpi.io.O_4.value = state["LED1"]
+    rpi.io.O_5.value = state["LED2"]
+    rpi.io.O_6.value = state["LED3"]
+    rpi.io.O_7.value = state["LED4"]
+    rpi.io.O_8.value = state["LED5"]
+    rpi.io.O_9.value = state["LED6"]
+    rpi.io.O_10.value = state["LED7"]
+    rpi.io.O_.value = state["LED8"]
     
-
     return {
         **buttons,
         **state
@@ -68,17 +71,17 @@ def get_actuator_state():
     Baca status output fisik RevPi (ground truth untuk GWeb)
     """
     return {
-        "LED1": int(rpi.io.O_1.value),
-        "LED2": int(rpi.io.O_2.value),
-        "LED3": int(rpi.io.O_3.value),
-        "LED4": int(rpi.io.O_4.value),
-        "BUZZ1": int(rpi.io.O_5.value),  
-        "LED6": int(rpi.io.O_6.value),
-        "LED7": int(rpi.io.O_7.value),
-        # "LED8": int(rpi.io.O_8.value),
-        # "LED9": int(rpi.io.O_9.value),
-        "BUZZ2": int(rpi.io.O_10.value),
-        # tambah jika perlu
+        "BUZZ1": int(rpi.io.O_1.value),
+        "BUZZ2": int(rpi.io.O_2.value),
+        "BUZZ3": int(rpi.io.O_3.value),
+        "LED1": int(rpi.io.O_4.value),
+        "LED2": int(rpi.io.O_5.value),  
+        "LED3": int(rpi.io.O_6.value),
+        "LED4": int(rpi.io.O_7.value),
+        "LED5": int(rpi.io.O_8.value),
+        "LED6": int(rpi.io.O_9.value),
+        "LED7": int(rpi.io.O_10.value),
+        "LED8": int(rpi.io.O_11.value),
     }
 
 def apply_control_command(cmd: dict, command_id: str) -> Dict:
@@ -90,37 +93,49 @@ def apply_control_command(cmd: dict, command_id: str) -> Dict:
     applied_keys = []
 
     try:
+        if "BUZZ1" in cmd:
+            rpi.io.O_1.value = int(cmd["BUZZ1"])
+            applied_keys.append("BUZZ1")
+
+        if "BUZZ2" in cmd:
+            rpi.io.O_2.value = int(cmd["BUZZ2"])
+            applied_keys.append("BUZZ2")
+
+        if "BUZZ3" in cmd:
+            rpi.io.O_3.value = int(cmd["BUZZ3"])
+            applied_keys.append("BUZZ3")
+
         if "LED1" in cmd:
-            rpi.io.O_1.value = int(cmd["LED1"])
+            rpi.io.O_4.value = int(cmd["LED1"])
             applied_keys.append("LED1")
 
         if "LED2" in cmd:
-            rpi.io.O_2.value = int(cmd["LED2"])
+            rpi.io.O_5.value = int(cmd["LED2"])
             applied_keys.append("LED2")
 
         if "LED3" in cmd:
-            rpi.io.O_3.value = int(cmd["LED3"])
+            rpi.io.O_6.value = int(cmd["LED3"])
             applied_keys.append("LED3")
 
         if "LED4" in cmd:
-            rpi.io.O_4.value = int(cmd["LED4"])
+            rpi.io.O_7.value = int(cmd["LED4"])
             applied_keys.append("LED4")
 
-        if "BUZZ1" in cmd:
-            rpi.io.O_5.value = int(cmd["BUZZ1"])
-            applied_keys.append("BUZZ1")
+        if "LED5" in cmd:
+            rpi.io.O_8.value = int(cmd["LED5"])
+            applied_keys.append("LED5")
 
         if "LED6" in cmd:
-            rpi.io.O_6.value = int(cmd["LED6"])
+            rpi.io.O_9.value = int(cmd["LED6"])
             applied_keys.append("LED6")
 
         if "LED7" in cmd:
-            rpi.io.O_7.value = int(cmd["LED7"])
+            rpi.io.O_10.value = int(cmd["LED7"])
             applied_keys.append("LED7")
 
-        if "BUZZ2" in cmd:
-            rpi.io.O_10.value = int(cmd["BUZZ2"])
-            applied_keys.append("BUZZ2")
+        if "LED8" in cmd:
+            rpi.io.O_11.value = int(cmd["LED8"])
+            applied_keys.append("LED8")
 
         success = True
         error = None
