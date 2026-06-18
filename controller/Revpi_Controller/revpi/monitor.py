@@ -14,7 +14,6 @@ async def monitoring_task(server, interval: float = 1.0):
     Periodically read sensor & actuator data from RevPi,
     log it locally, and broadcast it to all connected WebSocket clients.
     """
-
     logger.info("Monitoring task started (interval=%ss)", interval)
 
     while True:
