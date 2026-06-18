@@ -9,8 +9,9 @@ rpi = revpimodio2.RevPiModIO(autorefresh=True)
 io = rpi.io
 
 # ============================== # CHANNEL KONSTANTA # ==============================
-SIGNAL_GEN_CHANNEL = "InputValue_1"   # µA
-RTD_CHANNEL        = "RTDValue_1"     # PT1000
+SIGNAL_GEN_CHANNEL = "InputValue_1"   # Signal Generator
+RTD_CHANNEL        = "RTDValue_1"     # RTD PT1000
+                                      # Proximity
 
 def truncate_float(val, n=2):
     return math.trunc(val * (10 ** n)) / (10 ** n)
