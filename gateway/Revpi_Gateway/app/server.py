@@ -25,9 +25,17 @@ class WebSocketGatewayServer:
         return f"cmd_{self.command_counter:04d}"
 
     # ============================== # HANDLER CLIENT WEBSOCKET # ==============================
-    async def handler(self, websocket):
+    async def handler(self, websocket, path=None):
+
         peer = websocket.remote_address
+
+        print("\n========================================")
+        print("[CONNECT] Client Connected")
+        print(f"Address : {peer}")
+        print("========================================")
+
         logger.info("Client connected: %s", peer)
+
         self._clients.add(websocket)
 
         role = None
@@ -39,24 +47,52 @@ class WebSocketGatewayServer:
 
             role = data.get("role")
             client_id = data.get("id")
+            print("\n========== REGISTER ==========")
+            print(f"Role : {role}")
+            print(f"ID   : {client_id}")
+            print("==============================")
 
             if role == "controller":
                 self.controllers[client_id] = websocket
+                print("\n========== REGISTERED CONTROLLER ==========")
+                print(self.controllers)
+                print("===========================================")
+                
             elif role == "web":
                 self.web_clients.add(websocket)
             else:
                 return
-
+            print("\n========== ACTIVE CLIENT ==========")
+            print(f"Controllers : {len(self.controllers)}")
+            print(f"Web Clients : {len(self.web_clients)}")
+            print(f"Total Client: {len(self._clients)}")
+            print("===================================")    
             async for message in websocket:
+                print("\n========== RX ==========")
+                print(f"From : {client_id}")
+                print(message)
+                print("========================")
                 await handle_message(websocket, message, self, peer)
 
         finally:
+            print("\n========================================")
+            print("[DISCONNECT]")
+            print(f"Role : {role}")
+            print(f"ID   : {client_id}")
+            print("========================================")
+
+
             self._clients.discard(websocket)
             if role == "controller" and client_id:
                 self.controllers.pop(client_id, None)
             elif role == "web":
                 self.web_clients.discard(websocket)
-
+            print("\n========== ACTIVE CLIENT ==========")
+            print(f"Controllers : {len(self.controllers)}")
+            print(f"Web Clients : {len(self.web_clients)}")
+            print(f"Total Client: {len(self._clients)}")
+            print("===================================")
+                
     # ============================== # SEND TO SPECIFIC CONTROLLER # ==============================
     async def send_to_controller(self, controller_id: str, payload: str):
         ws = self.controllers.get(controller_id)

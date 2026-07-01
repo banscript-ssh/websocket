@@ -1,8 +1,12 @@
-# ============================== # IMPORT LIBRARY # ============================== #
+# ============================== #
+# IMPORT LIBRARY
+# ============================== #
+
 import json
 import logging
 import time
 from typing import Optional
+
 import websockets
 
 from utils.csv_logger import (
@@ -14,38 +18,90 @@ from utils.csv_logger import (
 
 logger = logging.getLogger("app/handlers/message")
 
-# ============================== # HANDLE MESSAGE # ============================== #
+
+# ============================== #
+# HANDLE MESSAGE
+# ============================== #
+
 async def handle_message(
     websocket: websockets.WebSocketServerProtocol,
     message: str,
     server,
     peer: Optional[tuple]
 ):
-    logger.info("Received message from %s: %s", peer, message)
 
-    # ===================== PARSE JSON ===================== #
+    logger.info("Received message from %s", peer)
+
+    # ==========================================================
+    # PARSE JSON
+    # ==========================================================
+
     try:
         data = json.loads(message)
-    except Exception:
+
+    except json.JSONDecodeError:
+
         logger.warning("Invalid JSON from %s", peer)
         return
-    msg_type = data.get("type")
 
-    # ========================================================================== #
-    # COMMAND FLOW (WEB → CONTROLLER)
-    # ========================================================================== #
+    # ==========================================================
+    # DETECT MESSAGE SOURCE
+    # ==========================================================
+
+    if websocket in server.web_clients:
+
+        logger.info("[SOURCE] WEB CLIENT")
+
+        # Dashboard hanya mengirim state I/O,
+        # Gateway membungkus menjadi command.
+
+        data = {
+            "type": "command",
+            "target": "revpi01",       # <-- Sesuaikan dengan ID Controller
+            "payload": data
+        }
+
+        msg_type = "command"
+
+    elif websocket in server.controllers.values():
+
+        logger.info("[SOURCE] CONTROLLER")
+
+        msg_type = data.get("type")
+
+    else:
+
+        logger.warning(
+            "Unknown websocket source : %s",
+            peer
+        )
+        return
+
+    logger.info("[MESSAGE] Type : %s", msg_type)
+
+    # ==========================================================
+    # COMMAND FLOW
+    # WEB  ---> CONTROLLER
+    # ==========================================================
+
     if msg_type == "command":
-        # ===================== GENERATE COMMAND ID ===================== #
+
         command_id = server.generate_correlation_id()
-        # ===================== GET TARGET CONTROLLER ===================== #
+
         target = data.get("target")
+
         if not target:
-            logger.warning("Command tanpa target dari %s", peer)
+
+            logger.warning(
+                "Command tanpa target dari %s",
+                peer
+            )
             return
 
-        # ===================== CHECK CONTROLLER ===================== #
         controller_ws = server.controllers.get(target)
+
         if not controller_ws:
+
             logger.warning(
                 "Controller %s tidak ditemukan",
                 target
@@ -60,106 +116,149 @@ async def handle_message(
             await server.forward_ack_to_web(
                 json.dumps(error_payload)
             )
+
             return
 
-        # ===================== GET SOURCE INFORMATION ===================== #
         source_ip = peer[0] if peer else "unknown"
         source_port = peer[1] if peer else -1
 
-        # ===================== CSV LOGGER ===================== #
-        # Simpan command yang diterima gateway
+        # ======================================================
+        # CSV LOGGER
+        # ======================================================
+
         log_receive_command(
             command_id=command_id,
             source_ip=source_ip,
             source_port=source_port,
-            parsed_keys=data.keys(),
+            parsed_keys=data["payload"].keys(),
             raw_payload=message,
         )
 
-        # ===================== ADD METADATA ===================== #
+        # ======================================================
+        # ADD METADATA
+        # ======================================================
+
         data["command_id"] = command_id
         data["gateway_ts"] = time.time()
 
-        # ===================== FORWARD COMMAND ===================== #
+        logger.info(
+            "\n========== TX TO CONTROLLER ==========\n"
+            "Target : %s\n"
+            "%s\n"
+            "=====================================",
+            target,
+            json.dumps(data, indent=4)
+        )
+
         try:
+
             await server.send_to_controller(
                 target,
                 json.dumps(data)
             )
 
             logger.info(
-                "[COMMAND] forwarded | cmd_id=%s | target=%s",
+                "[COMMAND] Forwarded | CMD=%s | Target=%s",
                 command_id,
                 target
             )
+
         except Exception as e:
+
             logger.error(
-                "Failed to send to controller %s: %s",
+                "Failed sending command to %s : %s",
                 target,
                 e
             )
 
-    # ========================================================================== #
-    # DATA FLOW (CONTROLLER → WEB)
-    # ========================================================================== #
-    elif msg_type == "data":
-        try:
-            logger.info(
-                "[DATA] source=%s TEMP=%s HUM=%s",
-                data.get("source"),
-                data.get("TEMP"),
-                data.get("HUM"),
-            )
+    # ==========================================================
+    # TELEMETRY FLOW
+    # CONTROLLER ---> WEB
+    # ==========================================================
 
-            # ===================== CSV LOGGER ===================== #
-            # Simpan data telemetry sensor
+    elif msg_type == "data":
+
+        logger.info(
+            "\n========== RX TELEMETRY ==========\n%s\n"
+            "==================================",
+            json.dumps(data, indent=4)
+        )
+
+        logger.info(
+            "[DATA] Source=%s | TEMP=%s | HUM=%s",
+            data.get("source"),
+            data.get("TEMP"),
+            data.get("HUM"),
+        )
+
+        try:
+
             log_data(data)
 
-            # Hitung interval antar paket telemetry
             log_telemetry_interval()
 
-            # ===================== BROADCAST DATA ===================== #
             await server.broadcast_to_web(message)
+
+            logger.info(
+                "[DATA] Broadcast to Web Client Success"
+            )
+
         except Exception as e:
+
             logger.error(
-                "Broadcast error: %s",
+                "Broadcast error : %s",
                 e
             )
 
-    # ========================================================================== #
-    # ACK / RESPONSE FLOW (CONTROLLER → WEB)
-    # ========================================================================== #
-    elif msg_type == "ack":
-        try:
-            logger.info(
-                "[ACK] cmd_id=%s | source=%s | status=%s",
-                data.get("command_id"),
-                data.get("source"),
-                data.get("status"),
-            )
+    # ==========================================================
+    # ACK FLOW
+    # CONTROLLER ---> WEB
+    # ==========================================================
 
-            # ===================== CSV LOGGER ===================== #
-            # Simpan acknowledgement dari controller
+    elif msg_type == "ack":
+
+        logger.info(
+            "\n========== RX ACK ==========\n%s\n"
+            "============================",
+            json.dumps(data, indent=4)
+        )
+
+        logger.info(
+            "[ACK] CMD=%s | STATUS=%s",
+            data.get("command_id"),
+            data.get("status"),
+        )
+
+        try:
+
             log_ack(
                 command_id=data.get("command_id"),
                 source=data.get("source"),
                 status=data.get("status"),
                 latency_ms=data.get("latency_ms"),
             )
-            # ===================== FORWARD ACK ===================== #
+
             await server.forward_ack_to_web(message)
+
+            logger.info(
+                "[ACK] Forwarded to Web Client"
+            )
+
         except Exception as e:
+
             logger.error(
-                "ACK handling error: %s",
+                "ACK handling error : %s",
                 e
             )
 
-    # ========================================================================== #
-    # UNKNOWN TYPE
-    # ========================================================================== #
+    # ==========================================================
+    # UNKNOWN MESSAGE
+    # ==========================================================
+
     else:
+
         logger.warning(
-            "Unknown message type from %s: %s",
+            "Unknown message type from %s : %s",
             peer,
             msg_type
         )
