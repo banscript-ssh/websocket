@@ -11,7 +11,7 @@ def parse(resp):
         return int.from_bytes(resp[3:5], "big") / 10.0
     return None
 
-def read_md02(port="/dev/ttyUSB0"):
+def read_md02(port="/dev/ttyRS485"):
     try:
         with serial.Serial(port, 9600, timeout=1) as ser:
             ser.write(CMD_TEMP)

@@ -2,14 +2,13 @@
 import time
 import math
 import serial
-import revpimodio2
 
-# ============================== # INIT REVPI # ==============================
-rpi = revpimodio2.RevPiModIO(autorefresh=True)
+# ============================== # INIT REVPI (SHARED, JANGAN BUAT INSTANCE BARU) # ==============================
+from revpi.rpi_core import rpi
 io = rpi.io
 
 # ============================== # CHANNEL KONSTANTA # ==============================
-SIGNAL_GEN_CHANNEL = "InputValue_1"   # Signal Generator
+SIGNAL_GEN_CHANNEL = "InputValue_3"   # Signal Generator
 RTD_CHANNEL        = "RTDValue_1"     # RTD PT1000
                                       # Proximity
 

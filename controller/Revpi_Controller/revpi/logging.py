@@ -1,189 +1,477 @@
-# ============================== # IMPORT LIBRARY # ==============================
-import sqlite3
+# ============================== # IMPORT LIBRARY # ============================== #
 import csv
-import json
-from datetime import datetime
-import os
 import logging
+import os
+import sqlite3
+from datetime import datetime
 
 logger = logging.getLogger("revpi/logger")
 
-# =============================== # PATH # ===============================
+# ============================== # PATH # ============================== #
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 LOG_DIR = os.path.join(BASE_DIR, "data_logging")
 DB_FILE = os.path.join(LOG_DIR, "data.db")
 
-# =============================== # FIELD DEFINITIONS # ===============================
+# ============================== # FIELD DEFINITIONS # ============================== #
 MEASUREMENT_FIELDS = [
     "timestamp",
-    "epoch_ms",
-    "command_id",
-    "ANALOG", "RTD", "TEMP", "HUM",
-    "LED1", "LED2", "LED3", "LED4", "LED6", "LED7",
-    "BUZZ1", "BUZZ2",
-    "bytes_sent"
+    "MODE",
+    "TEMP",
+    "HUM",
+    "RTD",
+    "ANALOG",
+]
+
+INDICATOR_FIELDS = [
+    "timestamp",
+    "MODE",
+    "LED1",
+    "LED2",
+    "LED3",
+    "LED4",
+    "LED5",
+    "LED6",
+    "LED7",
+    "LED8",
+    "BUZZ1",
+    "BUZZ2",
+    "BUZZ3",
+    "RELAY_MOTOR",
+    "RELAY_FAN",
+    "RELAY_LAMP",
 ]
 
 EVENT_FIELDS = [
     "timestamp",
-    "epoch_ms",
     "command_id",
     "actuator",
     "status",
     "exec_time_ms",
-    "success"
+    "success",
 ]
 
 ACK_FIELDS = [
     "timestamp",
-    "epoch_ms",
     "command_id",
     "source",
     "status",
-    "latency_ms"
+    "latency_ms",
 ]
 
-# =============================== # INIT LOG FOLDER # ===============================
+SCENARIO_FIELDS = [
+    "timestamp",
+    "controller",
+    "scenario",
+    "mode",
+    "source",
+    "status",
+    "cycle_ms",
+
+    # Digital Input
+    "PB1",
+    "PB2",
+    "PB3",
+    "PB4",
+    "PB5",
+    "PB6",
+    "PB7",
+    "PB8",
+    "EM9",
+    "SW10",
+    "SW11",
+    "SW12",
+    "SW13",
+    "SW14",
+
+    # Sensor
+    "TEMP",
+    "HUM",
+    "RTD",
+    "ANALOG",
+
+    # Digital Output
+    "LED1",
+    "LED2",
+    "LED3",
+    "LED4",
+    "LED5",
+    "LED6",
+    "LED7",
+    "LED8",
+
+    "BUZZ1",
+    "BUZZ2",
+    "BUZZ3",
+
+    "RELAY_MOTOR",
+    "RELAY_FAN",
+    "RELAY_LAMP",
+]
+
+# ============================== # INIT LOG FOLDER # ============================== #
 def init_log_folder():
     os.makedirs(LOG_DIR, exist_ok=True)
 
-# =============================== # INIT DATABASE # ===============================
+# ============================== # INIT DATABASE # ============================== #
 def init_db():
+
     init_log_folder()
+
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
 
     c.execute("""
-        CREATE TABLE IF NOT EXISTS measurements (
-            timestamp TEXT, epoch_ms REAL, command_id TEXT, ANALOG REAL, RTD REAL,
-            TEMP REAL, HUM REAL, LED1 INTEGER, LED2 INTEGER, LED3 INTEGER, LED4 INTEGER,
-            LED6 INTEGER, LED7 INTEGER, BUZZ1 INTEGER, BUZZ2 INTEGER, bytes_sent INTEGER
+        CREATE TABLE IF NOT EXISTS measurements(
+            timestamp TEXT,
+            MODE TEXT,
+            TEMP REAL,
+            HUM REAL,
+            RTD REAL,
+            ANALOG REAL
         )
     """)
 
     c.execute("""
-        CREATE TABLE IF NOT EXISTS event (
-            timestamp TEXT, epoch_ms REAL, command_id TEXT, actuator TEXT, status TEXT,
-            exec_time_ms REAL, success INTEGER
+        CREATE TABLE IF NOT EXISTS indicator(
+            timestamp TEXT,
+            MODE TEXT,
+            LED1 INTEGER,
+            LED2 INTEGER,
+            LED3 INTEGER,
+            LED4 INTEGER,
+            LED5 INTEGER,
+            LED6 INTEGER,
+            LED7 INTEGER,
+            LED8 INTEGER,
+            BUZZ1 INTEGER,
+            BUZZ2 INTEGER,
+            BUZZ3 INTEGER,
+            RELAY_MOTOR INTEGER,
+            RELAY_FAN INTEGER,
+            RELAY_LAMP INTEGER
         )
     """)
 
     c.execute("""
-        CREATE TABLE IF NOT EXISTS ack (
-            timestamp TEXT, epoch_ms REAL, command_id TEXT, source TEXT,
-            status TEXT, latency_ms REAL
+        CREATE TABLE IF NOT EXISTS event(
+            timestamp TEXT,
+            command_id TEXT,
+            actuator TEXT,
+            status TEXT,
+            exec_time_ms REAL,
+            success INTEGER
+        )
+    """)
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS ack(
+            timestamp TEXT,
+            command_id TEXT,
+            source TEXT,
+            status TEXT,
+            latency_ms REAL
+        )
+    """)
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS scenario(
+
+            timestamp TEXT,
+            controller TEXT,
+            scenario TEXT,
+            mode TEXT,
+            source TEXT,
+            status TEXT,
+            cycle_ms REAL,
+
+            PB1 INTEGER,
+            PB2 INTEGER,
+            PB3 INTEGER,
+            PB4 INTEGER,
+            PB5 INTEGER,
+            PB6 INTEGER,
+            PB7 INTEGER,
+            PB8 INTEGER,
+
+            EM9 INTEGER,
+
+            SW10 INTEGER,
+            SW11 INTEGER,
+            SW12 INTEGER,
+            SW13 INTEGER,
+            SW14 INTEGER,
+
+            TEMP REAL,
+            HUM REAL,
+            RTD REAL,
+            ANALOG REAL,
+
+            LED1 INTEGER,
+            LED2 INTEGER,
+            LED3 INTEGER,
+            LED4 INTEGER,
+            LED5 INTEGER,
+            LED6 INTEGER,
+            LED7 INTEGER,
+            LED8 INTEGER,
+
+            BUZZ1 INTEGER,
+            BUZZ2 INTEGER,
+            BUZZ3 INTEGER,
+
+            RELAY_MOTOR INTEGER,
+            RELAY_FAN INTEGER,
+            RELAY_LAMP INTEGER
+
         )
     """)
 
     conn.commit()
     conn.close()
-    logger.info("Logger database initialized")
 
-# ===============================# INIT CSV # ===============================
+    logger.info("Logger initialized")
+
+# ============================== # INIT CSV # ============================== #
 def init_csv():
+
     init_log_folder()
+
     _write_header("measurements.csv", MEASUREMENT_FIELDS)
+    _write_header("indicator.csv", INDICATOR_FIELDS)
     _write_header("event.csv", EVENT_FIELDS)
     _write_header("ack.csv", ACK_FIELDS)
+    _write_header("scenario.csv", SCENARIO_FIELDS)
 
 def _write_header(filename, fields):
+
     path = os.path.join(LOG_DIR, filename)
-    if not os.path.isfile(path):
-        with open(path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=fields)
-            writer.writeheader()
 
-# =============================== # LOG MEASUREMENTS # ===============================
-def measurements(data: dict):
-    now = datetime.now()
+    if os.path.isfile(path):
+        return
 
-    row = {
-        "timestamp": now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
-        "epoch_ms": now.timestamp() * 1000,
-        "command_id": data.get("command_id", ""),
-        "ANALOG": data.get("ANALOG"),
-        "RTD": data.get("RTD"),
-        "TEMP": data.get("TEMP"),
-        "HUM": data.get("HUM"),
-        "LED1": int(bool(data.get("LED1", 0))),
-        "LED2": int(bool(data.get("LED2", 0))),
-        "LED3": int(bool(data.get("LED3", 0))),
-        "LED4": int(bool(data.get("LED4", 0))),
-        "LED6": int(bool(data.get("LED6", 0))),
-        "LED7": int(bool(data.get("LED7", 0))),
-        "BUZZ1": int(bool(data.get("BUZZ1", 0))),
-        "BUZZ2": int(bool(data.get("BUZZ2", 0))),
-        "bytes_sent": len(json.dumps(data).encode("utf-8"))
-    }
+    with open(path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+
+# ============================== # LOG MEASUREMENTS # ============================== #
+def measurements(data):
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+    row = {"timestamp": timestamp}
+
+    for key in MEASUREMENT_FIELDS[1:]:
+        row[key] = data.get(key)
 
     _insert_db("measurements", [row[k] for k in MEASUREMENT_FIELDS])
     _insert_csv("measurements.csv", MEASUREMENT_FIELDS, row)
 
+# ============================== # LOG INDICATOR # ============================== #
+def indicator(data):
 
-# =============================== # LOG EVENT # ===============================
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+    row = {"timestamp": timestamp}
+
+    for key in INDICATOR_FIELDS[1:]:
+        row[key] = data.get(key)
+
+    _insert_db("indicator", [row[k] for k in INDICATOR_FIELDS])
+    _insert_csv("indicator.csv", INDICATOR_FIELDS, row)
+
+# ============================== # LOG EVENT # ============================== #
 def event(
-    command_id: str,
-    actuator: str,
-    status: str,
-    exec_time_ms: float,
-    success: bool = True
+    command_id,
+    actuator,
+    status,
+    exec_time_ms,
+    success,
 ):
-    now = datetime.now()
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 
     row = {
-        "timestamp": now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
-        "epoch_ms": now.timestamp() * 1000,
+        "timestamp": timestamp,
         "command_id": command_id,
         "actuator": actuator,
         "status": status,
-        "exec_time_ms": exec_time_ms,
-        "success": int(success)
+        "exec_time_ms": round(exec_time_ms, 2),
+        "success": int(success),
     }
 
     _insert_db("event", [row[k] for k in EVENT_FIELDS])
     _insert_csv("event.csv", EVENT_FIELDS, row)
 
-
-# =============================== # LOG ACK # ===============================
+# ============================== # LOG ACK # ============================== #
 def ack(
-    command_id: str,
-    source: str,
-    status: str,
-    latency_ms: float
+    command_id,
+    source,
+    status,
+    latency_ms,
 ):
-    now = datetime.now()
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
 
     row = {
-        "timestamp": now.strftime("%Y-%m-%d %H:%M:%S.%f")[:-3],
-        "epoch_ms": now.timestamp() * 1000,
+        "timestamp": timestamp,
         "command_id": command_id,
         "source": source,
         "status": status,
-        "latency_ms": latency_ms
+        "latency_ms": round(latency_ms, 2),
     }
 
-    _insert_db("ack", [row[k] for k in ACK_FIELDS])
-    _insert_csv("ack.csv", ACK_FIELDS, row)
+    _insert_db(
+        "ack",
+        [row[k] for k in ACK_FIELDS]
+    )
 
+    _insert_csv(
+        "ack.csv",
+        ACK_FIELDS,
+        row,
+    )
 
-# =============================== # DB INSERT # ===============================
+# ============================== # LOG SCENARIO # ============================== #
+def scenario(
+    controller,
+    scenario_name,
+    mode,
+    source,
+    status,
+    cycle_ms,
+    inputs,
+    sensors,
+    outputs,
+):
+
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+    row = {
+
+        "timestamp": timestamp,
+
+        "controller": controller,
+
+        "scenario": scenario_name,
+
+        "mode": mode,
+
+        "source": source,
+
+        "status": status,
+
+        "cycle_ms": round(cycle_ms, 2),
+
+    }
+
+    # ==========================
+    # DIGITAL INPUT
+    # ==========================
+
+    for key in [
+
+        "PB1","PB2","PB3","PB4",
+        "PB5","PB6","PB7","PB8",
+
+        "EM9",
+
+        "SW10","SW11","SW12",
+        "SW13","SW14",
+
+    ]:
+
+        row[key] = inputs.get(
+            key,
+            0,
+        )
+
+    # ==========================
+    # SENSOR
+    # ==========================
+
+    for key in [
+
+        "TEMP",
+        "HUM",
+        "RTD",
+        "ANALOG",
+
+    ]:
+
+        row[key] = sensors.get(
+            key,
+            0,
+        )
+
+    # ==========================
+    # DIGITAL OUTPUT
+    # ==========================
+
+    for key in [
+
+        "LED1","LED2","LED3","LED4",
+        "LED5","LED6","LED7","LED8",
+
+        "BUZZ1","BUZZ2","BUZZ3",
+
+        "RELAY_MOTOR",
+        "RELAY_FAN",
+        "RELAY_LAMP",
+
+    ]:
+
+        row[key] = outputs.get(
+            key,
+            0,
+        )
+
+    _insert_db(
+        "scenario",
+        [row[k] for k in SCENARIO_FIELDS]
+    )
+
+    _insert_csv(
+        "scenario.csv",
+        SCENARIO_FIELDS,
+        row,
+    )
+
+# ============================== # DATABASE INSERT # ============================== #
 def _insert_db(table, values):
+
     try:
+
         conn = sqlite3.connect(DB_FILE)
         c = conn.cursor()
-        placeholders = ",".join(["?"] * len(values))
-        c.execute(f"INSERT INTO {table} VALUES ({placeholders})", values)
+
+        placeholder = ",".join(["?"] * len(values))
+
+        c.execute(
+            f"INSERT INTO {table} VALUES ({placeholder})",
+            values,
+        )
+
         conn.commit()
         conn.close()
+
     except Exception as e:
         logger.exception("DB insert error: %s", e)
 
-# =============================== # CSV INSERT # ===============================
-def _insert_csv(filename, fields, values):
+# ============================== # CSV INSERT # ============================== #
+def _insert_csv(filename, fields, row):
+
     path = os.path.join(LOG_DIR, filename)
+
     try:
-        with open(path, "a", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=fields)
-            writer.writerow(values)
+
+        with open(path, "a", newline="") as f:
+
+            writer = csv.DictWriter(
+                f,
+                fieldnames=fields,
+            )
+
+            writer.writerow(row)
+
     except Exception as e:
         logger.exception("CSV insert error: %s", e)
