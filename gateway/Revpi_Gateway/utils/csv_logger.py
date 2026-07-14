@@ -1,5 +1,5 @@
-```python
 import csv
+import json
 import os
 import threading
 import time
@@ -100,14 +100,23 @@ def log_ack(command_id: str,
     _append_csv(filepath, header, row)
 
 # ======================= TELEMETRY DATA LOGGER =======================
-def log_data(data: dict) -> None:
+def log_data(data: dict, raw_payload: str = None) -> None:
     filepath = os.path.join(_LOG_DIR, _TELEMETRY_DATA_FILE)
     base_fields = ["telemetry_ts", "telemetry_epoch",
                    "source", "TEMP", "HUM",
-                   "ANALOG", "RTD"]
+                   "ANALOG", "RTD", "bytes_sent"]
 
     actuator_fields = [key for key in data if key in LED_COLUMNS]
     header = base_fields + actuator_fields
+
+    # bytes_sent dihitung dari ukuran string mentah (raw_payload) yang
+    # benar-benar dikirim lewat WebSocket. Kalau raw_payload tidak
+    # tersedia (mis. dipanggil dari tempat lain), fallback ke perkiraan
+    # dari json.dumps(data) - kurang akurat tapi tetap berguna.
+    if raw_payload is not None:
+        bytes_sent = len(raw_payload.encode("utf-8"))
+    else:
+        bytes_sent = len(json.dumps(data).encode("utf-8"))
 
     row = {
         "telemetry_ts": _timestamp(),
@@ -116,7 +125,8 @@ def log_data(data: dict) -> None:
         "TEMP": data.get("TEMP"),
         "HUM": data.get("HUM"),
         "ANALOG": data.get("ANALOG"),
-        "RTD": data.get("RTD")
+        "RTD": data.get("RTD"),
+        "bytes_sent": bytes_sent
     }
     row.update({device: data.get(device) for device in actuator_fields})
 
@@ -152,4 +162,3 @@ def log_telemetry_interval() -> None:
            epoch_now,
            f"{delta_ms:.3f}" if delta_ms != "" else ""]
     _append_csv(filepath, header, row)
-```
