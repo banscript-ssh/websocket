@@ -1,0 +1,1923 @@
+```css
+/* ==========================================================
+   EDGE IIOT BASED REVPI TRAINER KIT
+   POLITEKNIK CALTEX RIAU
+========================================================== */
+
+
+/* ==========================================================
+   PANEL
+========================================================== */
+
+ni-front-panel{
+
+    background-color:#F4F6F9;
+
+    box-shadow:none;
+
+    font-family:"Segoe UI",sans-serif;
+}
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.main-title{
+
+    color:#0A2342;
+
+    font-size:32px;
+
+    font-weight:700;
+}
+
+.sub-title{
+
+    color:#6B7280;
+
+    font-size:13px;
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.example-section{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================================
+   TAB CONTROL
+========================================================== */
+
+ni-tab-control{
+
+    border-radius:10px;
+}
+
+ni-tab-control .jqx-fill-state-normal{
+
+    background:white !important;
+
+    color:#111827 !important;
+}
+
+ni-tab-control .jqx-fill-state-hover{
+
+    background:#F3F4F6 !important;
+}
+
+ni-tab-control .jqx-fill-state-pressed{
+
+    background:#0D6EFD !important;
+
+    color:white !important;
+}
+
+
+/* ==========================================================
+   CARTESIAN GRAPH
+========================================================== */
+
+ni-cartesian-graph{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+}
+
+ni-cartesian-graph .flot-x-axis text,
+ni-cartesian-graph .flot-y-axis text{
+
+    fill:#6B7280;
+}
+
+ni-cartesian-graph text.axisLabels{
+
+    fill:#374151;
+}
+
+
+/* ==========================================================
+   LED INDICATOR
+========================================================== */
+
+jqx-led{
+
+    --ni-true-background:#22C55E;
+
+    --ni-false-background:#D1D5DB;
+}
+
+.led-danger{
+
+    --ni-true-background:#EF4444;
+}
+
+.led-warning{
+
+    --ni-true-background:#F59E0B;
+}
+
+
+/* ==========================================================
+   PUSH BUTTON
+========================================================== */
+
+jqx-toggle-button{
+
+    --ni-control-background-color:#FFFFFF;
+
+    --ni-border:1px solid #D1D5DB;
+
+    --ni-foreground-color:#111827;
+
+    --ni-true-background:#0D6EFD;
+
+    --ni-true-foreground-color:white;
+
+    border-radius:8px;
+}
+
+
+/* ==========================================================
+   SWITCH BUTTON
+========================================================== */
+
+jqx-switch-button{
+
+    --ni-fill-background:#22C55E;
+}
+
+jqx-switch-button[checked] .jqx-thumb::after{
+
+    background:white;
+}
+
+
+/* ==========================================================
+   SLIDER
+========================================================== */
+
+jqx-slider{
+
+    --ni-fill-background:#0D6EFD;
+
+    --ni-foreground-color:#374151 !important;
+}
+
+
+/* ==========================================================
+   NUMERIC INDICATOR
+========================================================== */
+
+jqx-numeric-text-box{
+
+    --ni-border:1px solid #E5E7EB;
+
+    --ni-control-background-color:white;
+
+    --ni-indicator-background-color:white;
+
+    --ni-foreground-color:#111827 !important;
+}
+
+
+/* ==========================================================
+   STRING CONTROL
+========================================================== */
+
+jqx-text-box{
+
+    --ni-border:1px solid #E5E7EB;
+
+    --ni-control-background-color:white;
+
+    --ni-foreground-color:#111827 !important;
+}
+
+
+/* ==========================================================
+   DATE TIME
+========================================================== */
+
+jqx-date-time-picker{
+
+    --ni-border:1px solid #E5E7EB;
+
+    --ni-control-background-color:white;
+
+    --ni-foreground-color:#111827;
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.status-connected{
+
+    color:#22C55E;
+}
+
+.status-running{
+
+    color:#22C55E;
+}
+
+.status-danger{
+
+    color:#EF4444;
+}
+
+.status-warning{
+
+    color:#F59E0B;
+}
+
+
+/* ==========================================================
+   VALUE COLORS
+========================================================== */
+
+.value-red{
+
+    color:#EF4444;
+
+    font-weight:bold;
+}
+
+.value-blue{
+
+    color:#2563EB;
+
+    font-weight:bold;
+}
+
+.value-green{
+
+    color:#16A34A;
+
+    font-weight:bold;
+}
+
+.value-purple{
+
+    color:#7C3AED;
+
+    font-weight:bold;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer{
+
+    background:#041B4D;
+
+    color:white;
+}
+```
+```css
+/* ==========================================================
+                DASHBOARD
+========================================================== */
+
+
+/* ==========================================================
+   TEMPERATURE MONITORING
+========================================================== */
+
+.temperature-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-top:4px solid #EF4444;
+
+    border-radius:12px;
+
+    box-shadow:0px 2px 6px rgba(0,0,0,.08);
+}
+
+.temperature-title{
+
+    color:#DC2626;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   HUMIDITY MONITORING
+========================================================== */
+
+.humidity-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-top:4px solid #2563EB;
+
+    border-radius:12px;
+
+    box-shadow:0px 2px 6px rgba(0,0,0,.08);
+}
+
+.humidity-title{
+
+    color:#1D4ED8;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   INDICATOR PANEL
+========================================================== */
+
+.indicator-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-top:4px solid #7C3AED;
+
+    border-radius:12px;
+
+    box-shadow:0px 2px 6px rgba(0,0,0,.08);
+}
+
+.indicator-title{
+
+    color:#6D28D9;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   VALUE INDICATOR
+========================================================== */
+
+.value-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 5px rgba(0,0,0,.05);
+}
+
+
+/* ==========================================================
+   TEMPERATURE VALUE
+========================================================== */
+
+.temp-value{
+
+    color:#EF4444;
+
+    font-size:48px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   HUMIDITY VALUE
+========================================================== */
+
+.hum-value{
+
+    color:#2563EB;
+
+    font-size:48px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   RTD VALUE
+========================================================== */
+
+.rtd-value{
+
+    color:#16A34A;
+
+    font-size:48px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   ANALOG VALUE
+========================================================== */
+
+.analog-value{
+
+    color:#7C3AED;
+
+    font-size:48px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MIN MAX AVG
+========================================================== */
+
+.minmax-card{
+
+    background:#FAFAFA;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:8px;
+}
+
+.minmax-label{
+
+    color:#6B7280;
+
+    font-size:12px;
+}
+
+.minmax-value{
+
+    color:#111827;
+
+    font-size:16px;
+
+    font-weight:600;
+}
+
+
+/* ==========================================================
+   DIGITAL INPUT SUMMARY
+========================================================== */
+
+.digital-input-summary{
+
+    background:white;
+
+    border-top:4px solid #1D4ED8;
+
+    border-radius:12px;
+
+    border:1px solid #E5E7EB;
+}
+
+
+/* ==========================================================
+   DIGITAL OUTPUT SUMMARY
+========================================================== */
+
+.digital-output-summary{
+
+    background:white;
+
+    border-top:4px solid #F97316;
+
+    border-radius:12px;
+
+    border:1px solid #E5E7EB;
+}
+
+
+/* ==========================================================
+   ACTUATOR CONTROL
+========================================================== */
+
+.actuator-summary{
+
+    background:white;
+
+    border-top:4px solid #1D4ED8;
+
+    border-radius:12px;
+
+    border:1px solid #E5E7EB;
+}
+
+
+/* ==========================================================
+   COUNTER OBJECT
+========================================================== */
+
+.counter-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+.counter-value{
+
+    color:#111827;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+.counter-label{
+
+    color:#6B7280;
+
+    font-size:13px;
+}
+
+
+/* ==========================================================
+   EMERGENCY BUTTON
+========================================================== */
+
+.emergency-card{
+
+    border:2px solid #EF4444;
+
+    border-radius:12px;
+
+    background:#FFF5F5;
+}
+
+.emergency-text{
+
+    color:#DC2626;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   RELAY CONTROL
+========================================================== */
+
+.relay-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================================
+   BUZZER CONTROL
+========================================================== */
+
+.buzzer-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================================
+   LED TEST
+========================================================== */
+
+.led-test-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================================
+   LED ON
+========================================================== */
+
+.led-on{
+
+    --ni-true-background:#22C55E;
+}
+
+
+/* ==========================================================
+   LED OFF
+========================================================== */
+
+.led-off{
+
+    --ni-false-background:#D1D5DB;
+}
+
+
+/* ==========================================================
+   LED FAULT
+========================================================== */
+
+.led-fault{
+
+    --ni-true-background:#EF4444;
+}
+
+
+/* ==========================================================
+   PANEL SHADOW
+========================================================== */
+
+.panel-shadow{
+
+    box-shadow:
+
+    0px 2px 6px rgba(0,0,0,.08);
+}
+```
+```css
+/* ==========================================================
+                DIGITAL INPUTS
+========================================================== */
+
+
+/* ==========================================================
+   DIGITAL INPUT PANEL
+========================================================== */
+
+.digital-input-panel{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.digital-input-title{
+
+    color:#1D4ED8;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   PB NO
+========================================================== */
+
+.pb-no-card{
+
+    background:#F9FAFB;
+
+    border:1px solid #E5E7EB;
+
+    border-left:5px solid #22C55E;
+
+    border-radius:10px;
+}
+
+
+.pb-no-title{
+
+    color:#16A34A;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   PB NC
+========================================================== */
+
+.pb-nc-card{
+
+    background:#F9FAFB;
+
+    border:1px solid #E5E7EB;
+
+    border-left:5px solid #2563EB;
+
+    border-radius:10px;
+}
+
+
+.pb-nc-title{
+
+    color:#2563EB;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   SELECTOR SWITCH
+========================================================== */
+
+.selector-card{
+
+    background:#F9FAFB;
+
+    border:1px solid #E5E7EB;
+
+    border-left:5px solid #F59E0B;
+
+    border-radius:10px;
+}
+
+
+.selector-title{
+
+    color:#D97706;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   PROXIMITY SENSOR
+========================================================== */
+
+.proximity-card{
+
+    background:#F9FAFB;
+
+    border:1px solid #E5E7EB;
+
+    border-left:5px solid #7C3AED;
+
+    border-radius:10px;
+}
+
+
+.proximity-title{
+
+    color:#7C3AED;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   EMERGENCY BUTTON
+========================================================== */
+
+.emergency-button-card{
+
+    background:#FFF5F5;
+
+    border:2px solid #EF4444;
+
+    border-radius:12px;
+}
+
+
+.emergency-title{
+
+    color:#DC2626;
+
+    font-size:15px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   SAFE MODE
+========================================================== */
+
+.safe-status{
+
+    color:#22C55E;
+
+    font-size:18px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   EMERGENCY MODE
+========================================================== */
+
+.emergency-status{
+
+    color:#EF4444;
+
+    font-size:18px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   INPUT LABEL
+========================================================== */
+
+.input-label{
+
+    color:#6B7280;
+
+    font-size:13px;
+}
+
+
+/* ==========================================================
+   INPUT VALUE
+========================================================== */
+
+.input-value{
+
+    color:#111827;
+
+    font-size:16px;
+
+    font-weight:600;
+}
+
+
+/* ==========================================================
+   DIGITAL INPUT TABLE
+========================================================== */
+
+.digital-input-table{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================================
+   INPUT ON
+========================================================== */
+
+.input-on{
+
+    color:#22C55E;
+
+    font-weight:bold;
+}
+
+
+/* ==========================================================
+   INPUT OFF
+========================================================== */
+
+.input-off{
+
+    color:#9CA3AF;
+
+    font-weight:bold;
+}
+
+
+/* ==========================================================
+   SENSOR DETECTED
+========================================================== */
+
+.sensor-detected{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   SENSOR NOT DETECTED
+========================================================== */
+
+.sensor-undetected{
+
+    color:#9CA3AF;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   BORDER SHADOW
+========================================================== */
+
+.digital-input-shadow{
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+```
+```css
+/* ==========================================================
+                    ANALOG INPUTS
+========================================================== */
+
+
+/* ==========================================================
+   ANALOG PANEL
+========================================================== */
+
+.analog-panel{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================================
+   ANALOG TITLE
+========================================================== */
+
+.analog-title{
+
+    color:#0D6EFD;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   RTD PT100
+========================================================== */
+
+.rtd-card{
+
+    background:#FFFFFF;
+
+    border-left:5px solid #16A34A;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.rtd-title{
+
+    color:#16A34A;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+.rtd-value{
+
+    color:#16A34A;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   SIGNAL GENERATOR
+========================================================== */
+
+.signal-card{
+
+    background:#FFFFFF;
+
+    border-left:5px solid #7C3AED;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.signal-title{
+
+    color:#7C3AED;
+
+    font-weight:700;
+}
+
+.signal-value{
+
+    color:#7C3AED;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MD02 TEMPERATURE
+========================================================== */
+
+.md02-temp-card{
+
+    background:#FFFFFF;
+
+    border-left:5px solid #EF4444;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.md02-temp-title{
+
+    color:#DC2626;
+
+    font-weight:700;
+}
+
+.md02-temp-value{
+
+    color:#EF4444;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MD02 HUMIDITY
+========================================================== */
+
+.md02-hum-card{
+
+    background:#FFFFFF;
+
+    border-left:5px solid #2563EB;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.md02-hum-title{
+
+    color:#2563EB;
+
+    font-weight:700;
+}
+
+.md02-hum-value{
+
+    color:#2563EB;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MIN MAX AVG
+========================================================== */
+
+.minmax-panel{
+
+    background:#FAFAFA;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+.min-label{
+
+    color:#6B7280;
+
+    font-size:12px;
+}
+
+.max-label{
+
+    color:#6B7280;
+
+    font-size:12px;
+}
+
+.avg-label{
+
+    color:#6B7280;
+
+    font-size:12px;
+}
+
+.min-value,
+.max-value,
+.avg-value{
+
+    color:#111827;
+
+    font-size:18px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   ANALOG STATUS
+========================================================== */
+
+.sensor-normal{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+.sensor-warning{
+
+    color:#F59E0B;
+
+    font-weight:700;
+}
+
+.sensor-danger{
+
+    color:#EF4444;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   HIGH ALARM
+========================================================== */
+
+.high-alarm{
+
+    background:#FFF1F2;
+
+    border:2px solid #EF4444;
+
+    border-radius:10px;
+}
+
+.high-alarm-text{
+
+    color:#DC2626;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   LOW ALARM
+========================================================== */
+
+.low-alarm{
+
+    background:#EFF6FF;
+
+    border:2px solid #2563EB;
+
+    border-radius:10px;
+}
+
+.low-alarm-text{
+
+    color:#1D4ED8;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   TREND PANEL
+========================================================== */
+
+.trend-panel{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+}
+
+
+/* ==========================================================
+   HISTORICAL DATA PANEL
+========================================================== */
+
+.history-panel{
+
+    background:white;
+
+    border-radius:12px;
+
+    border:1px solid #E5E7EB;
+}
+```
+```css
+/* ==========================================================
+                    DIGITAL OUTPUTS
+========================================================== */
+
+
+/* ==========================================================
+   DIGITAL OUTPUT PANEL
+========================================================== */
+
+.digital-output-panel{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================================
+   PANEL TITLE
+========================================================== */
+
+.digital-output-title{
+
+    color:#F97316;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   LED PANEL
+========================================================== */
+
+.led-panel{
+
+    background:white;
+
+    border-left:5px solid #22C55E;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+
+.led-title{
+
+    color:#16A34A;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   LED STATUS
+========================================================== */
+
+.led-on{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+
+.led-off{
+
+    color:#9CA3AF;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   BUZZER PANEL
+========================================================== */
+
+.buzzer-panel{
+
+    background:white;
+
+    border-left:5px solid #7C3AED;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+
+.buzzer-title{
+
+    color:#7C3AED;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   BUZZER STATUS
+========================================================== */
+
+.buzzer-on{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+.buzzer-off{
+
+    color:#9CA3AF;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   RELAY PANEL
+========================================================== */
+
+.relay-panel{
+
+    background:white;
+
+    border-left:5px solid #2563EB;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+
+.relay-title{
+
+    color:#1D4ED8;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MOTOR RELAY
+========================================================== */
+
+.motor-relay{
+
+    border-left:5px solid #EF4444;
+}
+
+.motor-title{
+
+    color:#DC2626;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   FAN RELAY
+========================================================== */
+
+.fan-relay{
+
+    border-left:5px solid #06B6D4;
+}
+
+.fan-title{
+
+    color:#0891B2;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   LAMP RELAY
+========================================================== */
+
+.lamp-relay{
+
+    border-left:5px solid #F59E0B;
+}
+
+.lamp-title{
+
+    color:#D97706;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   OUTPUT TABLE
+========================================================== */
+
+.output-table{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================================
+   OUTPUT LABEL
+========================================================== */
+
+.output-label{
+
+    color:#6B7280;
+
+    font-size:13px;
+}
+
+
+/* ==========================================================
+   OUTPUT VALUE
+========================================================== */
+
+.output-value{
+
+    color:#111827;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   OUTPUT COUNTER
+========================================================== */
+
+.output-counter{
+
+    background:#FAFAFA;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+}
+
+
+.counter-value{
+
+    color:#111827;
+
+    font-size:36px;
+
+    font-weight:700;
+}
+
+
+.counter-label{
+
+    color:#6B7280;
+
+    font-size:13px;
+}
+
+
+/* ==========================================================
+   OUTPUT NORMAL
+========================================================== */
+
+.output-normal{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   OUTPUT WARNING
+========================================================== */
+
+.output-warning{
+
+    color:#F59E0B;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   OUTPUT FAULT
+========================================================== */
+
+.output-fault{
+
+    color:#EF4444;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   SHADOW
+========================================================== */
+
+.digital-output-shadow{
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+```
+```css
+/* ==========================================================
+                ACTUATOR CONTROL
+========================================================== */
+
+
+/* ==========================================================
+   ACTUATOR PANEL
+========================================================== */
+
+.actuator-panel{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================================
+   PANEL TITLE
+========================================================== */
+
+.actuator-title{
+
+    color:#2563EB;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MOTOR PANEL
+========================================================== */
+
+.motor-panel{
+
+    background:white;
+
+    border-left:5px solid #EF4444;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.motor-title{
+
+    color:#DC2626;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   MOTOR STATUS
+========================================================== */
+
+.motor-running{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+.motor-stop{
+
+    color:#9CA3AF;
+
+    font-weight:700;
+}
+
+.motor-fault{
+
+    color:#EF4444;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   FORWARD / REVERSE
+========================================================== */
+
+.forward-status{
+
+    color:#22C55E;
+
+    font-weight:700;
+}
+
+.reverse-status{
+
+    color:#F59E0B;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   SPEED VALUE
+========================================================== */
+
+.speed-value{
+
+    color:#2563EB;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   FAN PANEL
+========================================================== */
+
+.fan-panel{
+
+    background:white;
+
+    border-left:5px solid #06B6D4;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.fan-title{
+
+    color:#0891B2;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   LAMP PANEL
+========================================================== */
+
+.lamp-panel{
+
+    background:white;
+
+    border-left:5px solid #F59E0B;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.lamp-title{
+
+    color:#D97706;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   BUZZER TEST
+========================================================== */
+
+.buzzer-test-panel{
+
+    background:white;
+
+    border-left:5px solid #7C3AED;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.buzzer-test-title{
+
+    color:#7C3AED;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   LED TEST PANEL
+========================================================== */
+
+.led-test-panel{
+
+    background:white;
+
+    border-left:5px solid #22C55E;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+}
+
+.led-test-title{
+
+    color:#16A34A;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   ACTUATOR BUTTON
+========================================================== */
+
+.actuator-button{
+
+    --ni-control-background-color:white;
+
+    --ni-border:1px solid #D1D5DB;
+
+    --ni-foreground-color:#111827;
+
+    --ni-true-background:#0D6EFD;
+
+    --ni-true-foreground-color:white;
+
+    border-radius:8px;
+}
+
+
+/* ==========================================================
+   START BUTTON
+========================================================== */
+
+.start-button{
+
+    --ni-true-background:#22C55E;
+}
+
+
+/* ==========================================================
+   STOP BUTTON
+========================================================== */
+
+.stop-button{
+
+    --ni-true-background:#EF4444;
+}
+
+
+/* ==========================================================
+   RESET BUTTON
+========================================================== */
+
+.reset-button{
+
+    --ni-true-background:#F59E0B;
+}
+
+
+/* ==========================================================
+   SPEED SLIDER
+========================================================== */
+
+.speed-slider{
+
+    --ni-fill-background:#2563EB;
+}
+
+
+/* ==========================================================
+   EMERGENCY PANEL
+========================================================== */
+
+.emergency-panel{
+
+    background:#FFF5F5;
+
+    border:2px solid #EF4444;
+
+    border-radius:12px;
+}
+
+.emergency-title{
+
+    color:#DC2626;
+
+    font-size:15px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   EMERGENCY ACTIVE
+========================================================== */
+
+.emergency-active{
+
+    color:#EF4444;
+
+    font-size:20px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   EMERGENCY NORMAL
+========================================================== */
+
+.emergency-normal{
+
+    color:#22C55E;
+
+    font-size:20px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   PANEL SHADOW
+========================================================== */
+
+.actuator-shadow{
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.08);
+}
+```

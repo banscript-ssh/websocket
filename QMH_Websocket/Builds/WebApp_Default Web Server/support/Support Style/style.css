@@ -1,0 +1,684 @@
+/* ==========================================================
+   REVPI TRAINER KIT - GLOBAL STYLE
+========================================================== */
+
+/* ==========================================================
+   PANEL
+========================================================== */
+
+ni-front-panel{
+
+    background:#F4F6F9;
+
+    border:1px solid #DCE3EC;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 3px 10px rgba(15,23,42,.08);
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.example-section,
+.chart-card,
+.indicator-card,
+.gauge-card,
+.sensor-card,
+.summary-card,
+.table-panel,
+.status-box,
+.info-panel{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.05);
+
+    padding:12px;
+
+    transition:.2s;
+}
+
+.example-section:hover,
+.chart-card:hover,
+.indicator-card:hover,
+.gauge-card:hover,
+.sensor-card:hover{
+
+    box-shadow:
+    0px 4px 12px rgba(0,0,0,.08);
+}
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.section-title{
+
+    color:#0A1F63;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+.chart-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+    padding-bottom:8px;
+
+    border-bottom:1px solid #EEF2F7;
+}
+
+.chart-title{
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+.temp-title{
+
+    color:#EF4444;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3px;
+}
+
+.hum-title{
+
+    color:#1565F9;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3px;
+}
+
+.plot-button{
+
+    background:#FFFFFF;
+
+    border:1px solid #DCE3EC;
+
+    border-radius:6px;
+
+    padding:5px 10px;
+
+    font-size:12px;
+
+    color:#334155;
+}
+
+/* ==========================================================
+   NI CHART
+========================================================== */
+
+ni-chart{
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+}
+
+ni-chart .flot-x-axis text,
+ni-chart .flot-y-axis text{
+
+    fill:#64748B;
+
+    font-size:11px;
+}
+
+ni-chart text.axisLabels{
+
+    fill:#0A1F63;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+ni-chart .grid{
+
+    stroke:#E2E8F0;
+}
+
+ni-plot-legend{
+
+    background:white;
+
+    color:#1E293B;
+
+    border:none;
+
+    font-size:12px;
+
+    font-weight:600;
+}
+
+/* ==========================================================
+   SWITCH BUTTON
+========================================================== */
+
+jqx-switch-button{
+
+    --ni-true-background:#1565F9;
+
+    --ni-false-background:#D1D5DB;
+
+    --ni-border-radius:20px;
+}
+
+jqx-switch-button[checked] .jqx-thumb::after{
+
+    background:white;
+}
+
+/* ==========================================================
+   SLIDER
+========================================================== */
+
+jqx-slider{
+
+    --ni-fill-background:#1565F9;
+
+    --ni-foreground-color:white !important;
+}
+
+
+/* ==========================================================
+   NUMERIC INDICATOR
+========================================================== */
+
+jqx-numeric-text-box{
+
+    --ni-border:none;
+
+    --ni-control-background-color:transparent;
+
+    --ni-indicator-background-color:transparent;
+
+    --ni-foreground-color:#0A1F63 !important;
+
+    font-weight:700;
+}
+
+/* ==========================================================
+   SENSOR CARD
+========================================================== */
+
+.sensor-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 5px rgba(0,0,0,.05);
+
+    padding:12px;
+
+    transition:.2s;
+}
+
+.sensor-card:hover{
+
+    box-shadow:
+    0px 4px 10px rgba(0,0,0,.08);
+}
+
+.sensor-value{
+
+    font-size:32px;
+
+    font-weight:700;
+}
+
+.sensor-unit{
+
+    font-size:18px;
+
+    color:#64748B;
+
+    margin-left:4px;
+}
+/* ==========================================================
+   PROXIMITY SENSOR
+========================================================== */
+
+.proximity-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 5px rgba(0,0,0,.05);
+}
+
+.proximity-circle{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    background:#00B050;
+
+    border:3px solid #FFFFFF;
+
+    box-shadow:
+
+    0px 0px 15px rgba(0,176,80,.35),
+
+    0px 2px 5px rgba(0,0,0,.15);
+}
+
+.proximity-text{
+
+    color:#0F7A2E;
+
+    font-size:24px;
+
+    font-weight:700;
+}
+/* ==========================================================
+   GAUGE
+========================================================== */
+
+jqx-gauge{
+
+background:white;
+
+border:1px solid #E5E7EB;
+
+border-radius:12px;
+
+box-shadow:none;
+}
+
+jqx-gauge .jqx-value{
+
+    color:#0A1F63;
+
+    font-size:20px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   TANK
+========================================================== */
+
+jqx-tank{
+
+    --ni-foreground-color:#1565F9 !important;
+}
+
+
+/* ==========================================================
+   LED INDICATOR
+========================================================== */
+jqx-led{
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    border:2px solid #FFFFFF !important;
+
+    box-shadow:
+
+        inset 0px 2px 3px rgba(255,255,255,.9),
+
+        0px 0px 8px rgba(255,255,255,.85),
+
+        0px 2px 5px rgba(0,0,0,.2);
+}
+
+/* OFF */
+jqx-led.led-green{
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #FFFFFF 0%,
+        #D9D9D9 50%,
+        #BDBDBD 100%);
+}
+
+/* ON */
+jqx-led.led-green[checked]{
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #8CFF8C 0%,
+        #31D631 45%,
+        #158915 100%);
+
+    box-shadow:
+
+        inset 0px 2px 3px rgba(255,255,255,.9),
+
+        0px 0px 8px rgba(255,255,255,.85),
+
+        0px 2px 5px rgba(0,0,0,.2);
+}
+
+/* OFF */
+jqx-led.led-red{
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #FFFFFF 0%,
+        #D9D9D9 50%,
+        #BDBDBD 100%);
+}
+
+/* ON */
+jqx-led.led-red[checked]{
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #FFA0A0 0%,
+        #FF2B2B 45%,
+        #A50000 100%);
+
+    box-shadow:
+
+        inset 0px 2px 3px rgba(255,255,255,.9),
+
+        0px 0px 8px rgba(255,255,255,.85),
+
+        0px 2px 5px rgba(0,0,0,.2);
+}
+
+/* ==========================================================
+   PUSH BUTTON
+========================================================== */
+
+.pushbutton-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:14px;
+
+    box-shadow:
+    0px 2px 6px rgba(0,0,0,.05);
+}
+
+.pb-green{
+
+    background:#22C55E;
+
+    box-shadow:
+    0px 0px 10px rgba(34,197,94,.5);
+}
+
+.pb-red{
+
+    background:#EF4444;
+
+    box-shadow:
+    0px 0px 10px rgba(239,68,68,.5);
+}
+
+
+/* ==========================================================
+   COUNTER BOX
+========================================================== */
+
+.counter-box{
+
+    background:#F8FAFC;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:10px;
+}
+
+.counter-value{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    color:#111827;
+}
+
+/* ==========================================================
+   POWER BUTTON
+========================================================== */
+
+.activation-button{
+
+    --ni-true-background:#22C55E;
+
+    --ni-true-foreground-color:white;
+}
+
+.activation-button.warning{
+
+    --ni-true-background:#F59E0B;
+}
+
+.activation-button.danger{
+
+    --ni-true-background:#EF4444;
+}
+
+
+/* ==========================================================
+   EMERGENCY PANEL
+========================================================== */
+
+.emergency-panel{
+
+    background:#FFF5F5;
+
+    border:2px solid #EF4444;
+
+    border-radius:14px;
+
+    box-shadow:
+    0px 0px 15px rgba(239,68,68,.15);
+}
+
+.emg-safe{
+
+    color:#16A34A;
+
+    font-weight:700;
+}
+
+.emg-alarm{
+
+    color:#DC2626;
+
+    font-weight:700;
+
+    animation:blinkAlarm 1s infinite;
+}
+
+@keyframes blinkAlarm{
+
+0%{
+
+    opacity:1;
+}
+
+50%{
+
+    opacity:.3;
+}
+
+100%{
+
+    opacity:1;
+}
+
+}
+
+
+/* ==========================================================
+   STATUS BOX
+========================================================== */
+
+.status-box{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:10px;
+
+    box-shadow:
+    0px 1px 4px rgba(0,0,0,.05);
+}
+
+
+/* ==========================================================
+   INFO PANEL
+========================================================== */
+
+.info-panel{
+
+    background:#F8FAFC;
+
+    border:1px solid #DCE3EF;
+
+    border-radius:12px;
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.all-on{
+
+background:#16A34A;
+
+color:white;
+
+border-radius:8px;
+
+font-weight:700;
+
+box-shadow:
+0px 2px 5px rgba(22,163,74,.3);
+}
+
+.all-off{
+
+background:#DC2626;
+
+color:white;
+
+border-radius:8px;
+
+font-weight:700;
+
+box-shadow:
+0px 2px 5px rgba(220,38,38,.3);
+}
+
+.exit-button{
+
+    background:#FF2323;
+
+    color:white;
+
+    border-radius:8px;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   I/O ITEM
+========================================================== */
+
+.io-item{
+
+    border-bottom:1px solid #EEF2F7;
+
+    padding:8px;
+
+    color:#1E293B;
+
+    font-size:12px;
+
+    font-weight:600;
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer{
+
+    background:#001B63;
+
+    color:white;
+}
+
+.sensor-card{
+
+    background:#FFFFFF;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    box-shadow:
+    0px 2px 5px rgba(0,0,0,.05);
+
+    padding:10px;
+
+    transition:.2s;
+}
+
+.sensor-card:hover{
+
+    box-shadow:
+    0px 4px 10px rgba(0,0,0,.08);
+}

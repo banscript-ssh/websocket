@@ -351,4 +351,28 @@
 			<string>Application_1.gcompcache</string>
 		</value>
 	</item>
+	<item>
+		<key>
+			<string>Message Cluster_78150f1f188b429ab41267f098728598_cb743a1e138e48b38703e226bc3a88e3.gtypecache</string>
+		</key>
+		<value>
+			<string>Message Cluster_1.gtypecache</string>
+		</value>
+	</item>
+	<item>
+		<key>
+			<string>All Message Queues_f14b347bc07547209bdcf04b0c184a27_cb743a1e138e48b38703e226bc3a88e3.gtypecache</string>
+		</key>
+		<value>
+			<string>All Message Queues_1.gtypecache</string>
+		</value>
+	</item>
+	<item>
+		<key>
+			<string>hum_15dc0180763c4a7e9bacfd9412b5b897_cb743a1e138e48b38703e226bc3a88e3.gtypecache</string>
+		</key>
+		<value>
+			<string>hum.gtypecache</string>
+		</value>
+	</item>
 </SerializableDictionary>
